@@ -44,3 +44,4 @@
 /home/odinstudent/repos/angular-crud/BookStoreApi/obj/Debug/net8.0/BookStoreApi.pdb
 /home/odinstudent/repos/angular-crud/BookStoreApi/obj/Debug/net8.0/BookStoreApi.genruntimeconfig.cache
 /home/odinstudent/repos/angular-crud/BookStoreApi/obj/Debug/net8.0/ref/BookStoreApi.dll
+/home/odinstudent/repos/angular-crud/BookStoreApi/obj/Debug/net8.0/BookStoreApi.sourcelink.json
