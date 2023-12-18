@@ -25,7 +25,10 @@ if (app.Environment.IsDevelopment())
 }
 app.MapControllers();
 
-app.UseHttpsRedirection();
+app.UseCors(options =>
+options.WithOrigins("http://localhost:4200")
+.AllowAnyMethod()
+.AllowAnyHeader());
 
 var summaries = new[]
 {
@@ -47,6 +50,7 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
+app.UseAuthorization();
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
