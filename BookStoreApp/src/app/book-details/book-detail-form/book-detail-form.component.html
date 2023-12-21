@@ -1,1 +1,22 @@
-<p>book-detail-form works!</p>
+<form [formGroup]="formGroup">
+  <div class="mb-3">
+    <label>Book Title</label>
+    <input class="form-control form-control-lg" placeholder="Title of Book" formControlName="bookName" />
+  </div>
+  <div class="mb-3">
+    <label>By</label>
+    <input class="form-control form-control-lg" placeholder="Author" formControlName="author" />
+  </div>
+
+  <div class="mb-3">
+    <label>Price</label>
+    <input class="form-control form-control-lg" placeholder="Price" formControlName="price" />
+  </div>
+  <div class="mb-3">
+    <label>Category</label>
+    <input class="form-control form-control-lg" placeholder="Category/Genre" formControlName="category" />
+  </div>
+</form>
+<div class="d-grid">
+  <button class="btn btn-lg btn-success" (click)="submit()">Submit</button>  
+</div>

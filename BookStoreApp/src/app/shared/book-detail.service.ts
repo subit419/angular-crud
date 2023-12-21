@@ -10,9 +10,9 @@ export class BookDetailService {
 
   url: string = environment.apiBaseUrl + '/Books'
   list: BookDetail[] = []
+  formData: BookDetail = new BookDetail()
+
   constructor(private http: HttpClient) { }
-
-
   refreshList(){
     this.http.get(this.url)
     .subscribe({
@@ -22,5 +22,9 @@ export class BookDetailService {
       error: err => { console.log(err)}
 
     })
+  }
+
+  postBookDetail(formData: BookDetail) {
+    return this.http.post(this.url, formData)
   }
 }
