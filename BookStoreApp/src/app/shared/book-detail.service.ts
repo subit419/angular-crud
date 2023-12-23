@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../environments/environment.development';
 import { BookDetail } from './book-detail.model';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class BookDetailService {
   url: string = environment.apiBaseUrl + '/Books'
   list: BookDetail[] = []
   formData: BookDetail = new BookDetail()
+  formSubmitted: boolean = false;
 
   constructor(private http: HttpClient) { }
   refreshList(){
@@ -27,4 +29,7 @@ export class BookDetailService {
   postBookDetail(formData: BookDetail) {
     return this.http.post(this.url, formData)
   }
+
+  
+
 }
