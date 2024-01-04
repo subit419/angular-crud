@@ -30,6 +30,19 @@ export class BookDetailService {
     return this.http.post(this.url, formData)
   }
 
-  
+  putBookDetail(formData: BookDetail) {
+    return this.http.put(this.url + '/' + this.formData.id , formData)
+  }
 
+  deleteBookDetail(id:string) {
+    return this.http.delete(this.url + '/' + id);
+  } 
+
+  resetFormData(){
+    this.formData.id = '';
+    this.formData.author = '';
+    this.formData.price = 0;
+    this.formData.bookName = '';
+    this.formData.category = '';
+  }
 }

@@ -20,6 +20,7 @@ export class BookDetailFormComponent implements OnChanges {
       price: [0, Validators.required],
       category: ['', Validators.required],
       author: ['', Validators.required],
+      id: ['']
     });
   }
   public formGroup: FormGroup;
@@ -30,37 +31,52 @@ export class BookDetailFormComponent implements OnChanges {
     for (const propName in changes) {
       const change = changes[propName];
       if (change.firstChange == false) {
-        
         this.formGroup.setValue({
           bookName: change.currentValue.bookName,
           price: change.currentValue.price,
           category: change.currentValue.category,
-          author: change.currentValue.author
+          author: change.currentValue.author,
+          id: change.currentValue.id
         });
       }
     }
-    // this.formGroup.setValue({
-    //   bookName: changes['bookName'],
-    //   price: changes['price'],
-    //   category: changes['category'],
-    //   author: changes['author'],
-    // });
   }
-
   submit() {
     this.service.formSubmitted = true;
     if (this.formGroup.valid) {
-      this.service.postBookDetail(this.formGroup.value).subscribe({
-        next: (res) => {
-          this.service.refreshList();
-          this.formGroup.reset();
-          this.toastr.success('Book Added Successfully', 'Book Detail Register');
-          this.service.formSubmitted = false;
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+      if (!this.service.formData.id) {
+        this.insertRecord();
+      } else {
+        this.updateRecord();
+      }
     }
+  }
+
+  insertRecord() {
+    this.service.postBookDetail(this.formGroup.value).subscribe({
+      next: (res) => {
+        this.service.refreshList();
+        this.formGroup.reset();
+        this.toastr.success('Book Added Successfully', 'Book Detail Register');
+        this.service.formSubmitted = false;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  updateRecord() {
+    this.service.putBookDetail(this.formGroup.value).subscribe({
+      next: (res) => {
+        this.service.refreshList();
+        this.formGroup.reset();
+        this.toastr.info('Book Updated Successfully', 'Book Detail Register');
+        this.service.formSubmitted = false;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }
